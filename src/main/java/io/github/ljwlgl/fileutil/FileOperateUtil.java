@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -153,7 +154,7 @@ public class FileOperateUtil {
             String[] paths = fileClassPath.split("\\.");
             ClassPathResource classPathResource = new ClassPathResource(fileClassPath);
             InputStream inputStream = classPathResource.getInputStream();
-            File somethingFile = File.createTempFile(paths[0], paths[1]);
+            File somethingFile = Files.createTempFile(paths[0], paths[1]).toFile();
             try {
                 FileUtils.copyInputStreamToFile(inputStream, somethingFile);
             } finally {
